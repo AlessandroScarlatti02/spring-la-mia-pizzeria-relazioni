@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <div th:replace="~{fragments :: head}"></div>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Info</title>
+</head>
+
+<body>
+    <header>
+        <div th:replace="~{navbar :: nav}"></div>
+    </header>
+
+    <main th:object="${pizza}">
+        <div class="container-fluid justify-content-center p-3"
+            style="background-color: #FAC895; text-align: center; width: 900px; margin: 100px auto;">
+            <img th:src="@{*{pic}}" alt="Picture of a pizza" class="img-300"><br>
+            <p th:text="|Pizza *{name}|" class="h1"></p>
+            <hr>
+            <dl style="font-size: 25px;">
+                <dt>Description</dt>
+                <dd th:text="|Pizza with *{description}|"></dd>
+                <dt>Price</dt>
+                <dd th:text="|€ *{price}|"></dd>
+
+            </dl>
+            <div class="container mt-auto">
+                <a class="btn btn-secondary" th:href="@{ ${pizzaUrl} }" role="button">Back to Pizze</a>
+
+
+            </div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+    <div th:replace="~{fragments :: scripts}"></div>
+</body>
+
+</html>
