@@ -13,22 +13,51 @@
     </header>
 
     <main th:object="${pizza}">
-        <div class="container-fluid justify-content-center p-3"
-            style="background-color: #FAC895; text-align: center; width: 900px; margin: 100px auto;">
-            <img th:src="@{*{pic}}" alt="Picture of a pizza" class="img-300"><br>
-            <p th:text="|Pizza *{name}|" class="h1"></p>
-            <hr>
-            <dl style="font-size: 25px;">
-                <dt>Description</dt>
-                <dd th:text="|Pizza with *{description}|"></dd>
-                <dt>Price</dt>
-                <dd th:text="|€ *{price}|"></dd>
+        <div class="container-fluid justify-content-center "
+            style="text-align: center; width: 900px; margin: 25px auto;">
+            <div class="row">
+                <div class="col-12">
+                    <img th:src="@{*{pic}}" alt="Picture of a pizza" class="img-300"><br>
+                    <p th:text="|Pizza *{name}|" class="h1"></p>
+                    <hr>
+                    <dl style="font-size: 25px;">
+                        <dt>Description</dt>
+                        <dd th:text="|Pizza with *{description}|"></dd>
+                        <dt>Price</dt>
+                        <dd th:text="|€ *{price}|"></dd>
 
-            </dl>
-            <div class="container mt-auto">
-                <a class="btn btn-secondary" th:href="@{ ${pizzaUrl} }" role="button">Back to Pizze</a>
+                    </dl>
+                    <div class="container mt-auto">
+                        <a class="btn btn-secondary" th:href="@{ ${pizzaUrl} }" role="button">Back to Pizze</a>
+                        <a class="btn btn-success" th:href="@{|/pizze/*{id}/specialOffer|}" role="button">
+                            Create new Offer</a>
+                    </div>
 
+                </div>
+            </div>
 
+            <div class="col-12" style="margin-top: 25px;">
+                <table class="table table-light table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>Offer Name</th>
+                            <th>Starting Date</th>
+                            <th>Ending Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div th:each="specialOffer : ${pizza.specialOffers}">
+                            <tr>
+                                <td th:text="${specialOffer.title}"></td>
+                                <td th:text="${specialOffer.startingDate}"></td>
+                                <td th:text="${specialOffer.endingDate}"></td>
+                                <td><a class="btn btn-light m-2" th:href="@{|/pizze/edit/${pizza.id}|}"><i
+                                            class="fas fa-edit"></i></a></td>
+                            </tr>
+                        </div>
+                    </tbody>
+                </table>
             </div>
     </main>
 

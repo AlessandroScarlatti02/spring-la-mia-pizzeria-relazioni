@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import it.lessons.pizzeria.model.Pizza;
+import it.lessons.pizzeria.model.SpecialOffer;
+import it.lessons.pizzeria.repository.IngredientRepository;
 import it.lessons.pizzeria.repository.PizzaRepository;
+import it.lessons.pizzeria.repository.SpecialOfferRepository;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +29,12 @@ public class PizzeController {
 
     @Autowired
     private PizzaRepository pizzaRepo;
+
+    @Autowired
+    private SpecialOfferRepository specialOfferRepo;
+
+    @Autowired
+    private IngredientRepository ingredientRepo;
 
     @GetMapping
     public String index(Model model, @RequestParam(name = "keyword", required = false) String keyword) {
@@ -112,6 +121,16 @@ public class PizzeController {
         pizzaRepo.deleteById(id);
 
         return "redirect:/pizze";
+    }
+
+    @GetMapping("/{id}/specialOffer")
+    public String create(@PathVariable Long id, Model model) {
+
+        SpecialOffer specialOffer = new SpecialOffer();
+        specialOffer.setPizza(pizzaRepo.findById(id).get());
+        model.addAttribute("specialOffer", specialOffer);
+
+        return "specialOffers/create";
     }
 
 }

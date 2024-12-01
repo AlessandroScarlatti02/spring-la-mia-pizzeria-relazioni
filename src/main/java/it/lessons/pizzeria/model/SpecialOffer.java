@@ -31,6 +31,13 @@ public class SpecialOffer {
     @FutureOrPresent
     private LocalDate endingDate;
 
+    @NotBlank(message = "Can't be blank or null")
+    private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "pizza_id", nullable = false)
+    private Pizza pizza;
+
     public Long getId() {
         return id;
     }
@@ -70,12 +77,5 @@ public class SpecialOffer {
     public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
-
-    @NotBlank(message = "Can't be blank or null")
-    private String title;
-
-    @ManyToOne
-    @JoinColumn(name = "pizza_id", nullable = false)
-    private Pizza pizza;
 
 }

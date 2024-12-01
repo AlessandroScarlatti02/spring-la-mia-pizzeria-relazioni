@@ -1,9 +1,15 @@
 package it.lessons.pizzeria.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -31,8 +37,23 @@ public class Pizza {
     @NotNull(message = "Price cannot be null")
     private double price;
 
+    @OneToMany(mappedBy = "pizza")
+    private List<SpecialOffer> specialOffers;
+
+    @ManyToMany
+    @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private List<Ingredient> ingredients;
+
     public long getId() {
         return id;
+    }
+
+    public List<SpecialOffer> getSpecialOffers() {
+        return specialOffers;
+    }
+
+    public void setSpecialOffers(List<SpecialOffer> specialOffers) {
+        this.specialOffers = specialOffers;
     }
 
     public void setId(long id) {
