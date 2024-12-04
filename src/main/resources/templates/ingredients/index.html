@@ -27,7 +27,8 @@
                         <label for="name" class="form-label">Ingredient's name</label>
                         <input type="text" th:field="*{name}" id="name" class="form-control" th:errorClass="is-invalid">
                         <ul>
-                            <li th:each="err : ${#fields.allErrors()}" th:text="${err}">
+                            <li th:each="error : ${#fields.allErrors()}">
+                                <span th:text="${error}"></span>
                             </li>
                         </ul>
 

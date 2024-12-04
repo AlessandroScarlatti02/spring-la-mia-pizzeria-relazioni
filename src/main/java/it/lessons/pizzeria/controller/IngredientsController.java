@@ -36,7 +36,8 @@ public class IngredientsController {
     }
 
     @PostMapping("/store")
-    public String store(@Valid @ModelAttribute Ingredient ingredientForm, BindingResult bindingResult,
+    public String store(@Valid @ModelAttribute Ingredient ingredientForm,
+            BindingResult bindingResult,
             RedirectAttributes redirectAttribute, Model model) {
 
         List<Ingredient> optionalList = ingredientRepo.findByName(ingredientForm.getName());
